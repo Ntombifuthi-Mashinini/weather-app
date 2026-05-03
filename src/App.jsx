@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./App.css";
 
 export default function App() {
   const [city, setCity] = useState("Durban");
@@ -38,56 +39,58 @@ export default function App() {
     const temps = [22, 24, 23, 25, 26];
 
     return (
-      <ul>
+      <div className="forecast">
         {temps.map((temp, index) => (
-          <li key={index}>{temp}°C</li>
+          <div key={index} className="bubble">
+            {temp}°
+          </div>
         ))}
-      </ul>
+      </div>
     );
   }
 
   if (!loaded) {
     search();
-    return <p>Loading...</p>;
+    return <div className="loading">☁️ Loading..</div>;
   }
 
   return (
-    <div style={{ textAlign: "center", fontFamily: "Arial" }}>
-      <h1>🌤 Weather App</h1>
+    <div className="app">
+      <h1>🌈 Weather Vibes</h1>
 
       <form onSubmit={handleSubmit}>
         <input
           type="search"
-          placeholder="Enter city..."
+          placeholder="Search a city..."
           onChange={handleChange}
         />
-        <button type="submit">Search</button>
+        <button type="submit">✨</button>
       </form>
 
-      <br />
-      <button onClick={refresh()}>Refresh</button>
+      <button className="refresh" onClick={refresh()}>
+        🔄 Refresh
+      </button>
 
       {weather && (
-        <div>
+        <div className="weather">
           <h2>{weather.city}</h2>
-          <p>{weather.temperature}°C</p>
-
+          <div className="temp">{weather.temperature}°C</div>
           {weather.description && (
-            <p>Condition: {weather.description}</p>
+            <p className="desc">{weather.description}</p>
           )}
         </div>
       )}
 
-      <h3>5-Day Forecast</h3>
+      <h3>Next Days</h3>
       <Forecast />
 
-      <footer style={{ marginTop: "40px" }}>
+      <footer>
         <a
-          href="https://github.com/Ntombifuthi-Mashinini/weather-app.git"
+          href="https://github.com/YOUR-USERNAME/weather-app"
           target="_blank"
           rel="noreferrer"
         >
-          View on GitHub
+          🌸 GitHub Repo
         </a>
       </footer>
     </div>
