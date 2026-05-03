@@ -56,7 +56,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <h1>🌈 Weather Vibes</h1>
+      <h1>🌈 South-African Vibes</h1>
 
       <form onSubmit={handleSubmit}>
         <input
@@ -64,11 +64,11 @@ export default function App() {
           placeholder="Search a city..."
           onChange={handleChange}
         />
-        <button type="submit">✨</button>
+        <button type="submit">Enter</button>
       </form>
 
       <button className="refresh" onClick={refresh()}>
-        🔄 Refresh
+        🔄 Reload
       </button>
 
       {weather && (
