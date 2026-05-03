@@ -7,11 +7,25 @@ export default function App() {
   const [weather, setWeather] = useState(null);
   const [loaded, setLoaded] = useState(false);
 
+  function formatDescription(desc) {
+    const map = {
+      "broken clouds": "🌤 Partly Cloudy",
+      "scattered clouds": "🌥 Light Clouds",
+      "overcast clouds": "☁️ Cloudy",
+      "clear sky": "☀️ Clear",
+      "light rain": "🌦 Light Rain"
+    };
+
+    return map[desc] || desc;
+  }
+
   function handleResponse(response) {
     setWeather({
       temperature: Math.round(response.data.temperature.current),
       city: response.data.city,
-      description: response.data.condition.description
+      description: formatDescription(
+        response.data.condition.description
+      )
     });
     setLoaded(true);
   }
@@ -31,7 +45,7 @@ export default function App() {
     setCity(event.target.value);
   }
 
-  function refresh() {
+  function reload() {
     return () => search();
   }
 
@@ -51,7 +65,7 @@ export default function App() {
 
   if (!loaded) {
     search();
-    return <div className="loading">☁️ Loading..</div>;
+    return <div className="loading">☁️ Loading...</div>;
   }
 
   return (
@@ -67,7 +81,7 @@ export default function App() {
         <button type="submit">Enter</button>
       </form>
 
-      <button className="refresh" onClick={refresh()}>
+      <button className="reload" onClick={reload()}>
         🔄 Reload
       </button>
 
@@ -75,9 +89,7 @@ export default function App() {
         <div className="weather">
           <h2>{weather.city}</h2>
           <div className="temp">{weather.temperature}°C</div>
-          {weather.description && (
-            <p className="desc">{weather.description}</p>
-          )}
+          <p className="desc">{weather.description}</p>
         </div>
       )}
 
@@ -86,7 +98,7 @@ export default function App() {
 
       <footer>
         <a
-          href="https://github.com/YOUR-USERNAME/weather-app"
+          href="https://github.com/Ntombifuthi-Mashinini/weather-app.git"
           target="_blank"
           rel="noreferrer"
         >
